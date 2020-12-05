@@ -9,6 +9,10 @@ import javax.persistence.Id;
 public class User {
     @Id
     private Integer id;
-
+    private String userName;
+    private Integer contact;
+    private String firstName;
+    private String lastname;
+    private String  email;
 
 }
