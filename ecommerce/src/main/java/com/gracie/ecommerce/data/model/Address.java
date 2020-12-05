@@ -3,10 +3,9 @@ package com.gracie.ecommerce.data.model;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
+
 @Data
 @Entity
 @Service
@@ -20,4 +19,7 @@ public class Address {
     private String city;
     private String state;
     private String postal_code;
+
+    @OneToMany
+    private List<User> addressOwners;
 }
