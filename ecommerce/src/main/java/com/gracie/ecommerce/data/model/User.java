@@ -16,11 +16,13 @@ public class User {
 
     private String firstName;
 
-    private String lastname;
+    private String lastName;
 
     private String  email;
 
     private String password;
+
+    private Role role;
 
     @OneToMany
     private List<Address> address;
