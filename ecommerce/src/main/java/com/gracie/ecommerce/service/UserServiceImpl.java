@@ -5,9 +5,11 @@ import com.gracie.ecommerce.Dto.DtoUserRegistration;
 import com.gracie.ecommerce.data.model.User;
 import com.gracie.ecommerce.data.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -18,11 +20,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User saveUser(User user) {
+
         return userRepository.save(user);
     }
 
     @Override
     public void deleteUser(User user) {
+
         userRepository.delete(user);
     }
 
@@ -46,6 +50,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> checkIfUserExistsByEmail(String email) {
+
         return userRepository.findByEmail();
     }
 

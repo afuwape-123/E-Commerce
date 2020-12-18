@@ -1,5 +1,6 @@
 package com.gracie.ecommerce.data.repositories;
 
+import com.gracie.ecommerce.Dto.DtoUserRegistration;
 import com.gracie.ecommerce.data.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
