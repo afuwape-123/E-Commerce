@@ -3,6 +3,7 @@ package com.gracie.ecommerce.web.user;
 
 import com.gracie.ecommerce.Dto.DtoUserRegistration;
 import com.gracie.ecommerce.data.model.User;
+import com.gracie.ecommerce.service.UserService;
 import com.gracie.ecommerce.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -69,6 +70,6 @@ public class UserController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

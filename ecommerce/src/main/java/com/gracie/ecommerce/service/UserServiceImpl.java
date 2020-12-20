@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserService {
 
         User newUser = new User();
         if(optionalUser.isPresent()){
+
         }
         else{
             newUser = DtoUserMapper.convertDtoUserRegistrationTouser(dtoUserRegistration);
