@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/user/")
 
 public class UserController {
 
     @Autowired
     UserServiceImpl userService ;
 
-    @PostMapping("/registerUser")
+    @PostMapping("registerUser")
     public ResponseEntity<?> registerUser(DtoUserRegistration dtoUserRegistration)throws Exception{
         try{
             userService.registerUser(dtoUserRegistration);

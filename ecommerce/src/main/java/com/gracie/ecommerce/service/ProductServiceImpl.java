@@ -5,7 +5,9 @@ import com.gracie.ecommerce.Dto.ProductDtoMapper;
 import com.gracie.ecommerce.data.model.Product;
 import com.gracie.ecommerce.data.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
