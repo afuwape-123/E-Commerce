@@ -11,7 +11,7 @@ public interface UserService {
 
     void deleteUser(User user);
 
-    User registerUser(DtoUserRegistration dtoUserRegistration);
+    User registerUser(DtoUserRegistration dtoUserRegistration) throws Exception;
 
     Optional<User> checkIfUserExistsByEmail(String email);
 }
