@@ -2,6 +2,7 @@ package com.gracie.ecommerce.web.user;
 
 
 import com.gracie.ecommerce.Dto.DtoUserRegistration;
+import com.gracie.ecommerce.Exceptions.RegisterException;
 import com.gracie.ecommerce.data.model.User;
 import com.gracie.ecommerce.service.UserService;
 import com.gracie.ecommerce.service.UserServiceImpl;
@@ -22,19 +23,19 @@ public class UserController {
     UserServiceImpl userService ;
 
     @PostMapping("registerUser")
-    public ResponseEntity<?> registerUser(DtoUserRegistration dtoUserRegistration)throws Exception{
+    public ResponseEntity<?> registerUser(DtoUserRegistration dtoUserRegistration) {
         try{
             userService.registerUser(dtoUserRegistration);
         }
 
-        catch (Exception e){
+        catch (RegisterException e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/deleteUser")
-    public ResponseEntity<String> deleteUser(User user)throws Exception{
+    public ResponseEntity<String> deleteUser(User user){
         try{
             userService.deleteUser(user);
         }

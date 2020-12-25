@@ -2,10 +2,13 @@ package com.gracie.ecommerce.service;
 
 import com.gracie.ecommerce.Dto.DtoUserMapper;
 import com.gracie.ecommerce.Dto.DtoUserRegistration;
+import com.gracie.ecommerce.Exceptions.RegisterException;
 import com.gracie.ecommerce.data.model.Role;
 import com.gracie.ecommerce.data.model.User;
 import com.gracie.ecommerce.data.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -18,6 +21,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
+
+
+    PasswordEncoder passwordEncoder;
 
 
 //    @Autowired
@@ -36,22 +42,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User registerUser(DtoUserRegistration dtoUserRegistration) throws Exception {
+    public User registerUser(DtoUserRegistration dtoUserRegistration) throws RegisterException {
         Optional<User> optionalUser = checkIfUserExistsByEmail(dtoUserRegistration.getEmail());
 
 
         if(optionalUser.isPresent()){
 
-            throw new Exception("user already exist");
+            throw new RegisterException("user already exist");
 
         }
         else{
            User newUser = DtoUserMapper.convertDtoUserRegistrationTouser(dtoUserRegistration);
-
+//            newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
             newUser.setRole(Role.USER);
-
-            saveUser(newUser);
-            return newUser;
+           return saveUser(newUser);
         }
     }
 

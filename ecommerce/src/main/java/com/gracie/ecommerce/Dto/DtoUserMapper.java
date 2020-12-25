@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 public class DtoUserMapper {
     public static User convertDtoUserRegistrationTouser(DtoUserRegistration dtoUserRegistration){
       User user = new User();
-      dtoUserRegistration.setEmail(dtoUserRegistration.getEmail().toLowerCase());
-      dtoUserRegistration.setFirstName(dtoUserRegistration.getFirstName());
-      dtoUserRegistration.setLastName(dtoUserRegistration.getLastName());
-      dtoUserRegistration.setPassword(dtoUserRegistration.getPassword());
+      user.setEmail(dtoUserRegistration.getEmail());
+      user.setFirstName(dtoUserRegistration.getFirstName());
+      user.setLastName(dtoUserRegistration.getLastName());
+      user.setPassword(dtoUserRegistration.getPassword());
       return user;
     }
 }
