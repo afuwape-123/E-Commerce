@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/user/")
+@RequestMapping("/user")
 
 public class UserController {
 
     @Autowired
     UserServiceImpl userService ;
 
-    @PostMapping("registerUser")
+    @PostMapping("/registerUser")
     public ResponseEntity<?> registerUser(DtoUserRegistration dtoUserRegistration) {
         try{
             userService.registerUser(dtoUserRegistration);
@@ -31,7 +31,7 @@ public class UserController {
         catch (RegisterException e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return ResponseEntity.ok().body(dtoUserRegistration);
     }
 
     @DeleteMapping("/deleteUser")
