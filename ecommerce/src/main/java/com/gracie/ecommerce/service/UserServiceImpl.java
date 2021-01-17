@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
         }
         else{
            User newUser = DtoUserMapper.convertDtoUserRegistrationTouser(dtoUserRegistration);
-//            newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+            newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
             newUser.setRole(Role.USER);
            return saveUser(newUser);
         }
