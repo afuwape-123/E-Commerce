@@ -1,62 +1,70 @@
 package com.gracie.ecommerce.web.user;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gracie.ecommerce.Dto.DtoUserMapper;
-import com.gracie.ecommerce.Dto.DtoUserRegistration;
 import com.gracie.ecommerce.data.model.User;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.AfterEach;
+import com.gracie.ecommerce.service.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Slf4j
 @SpringBootTest
 @AutoConfigureMockMvc
-class UserControllerTest {
+public class UserControllerTest {
+    @Autowired
+    UserServiceImpl userService;
+
 
     @Autowired
     private MockMvc mockMvc;
+
     ObjectMapper mapper = new ObjectMapper();
+
 
     @BeforeEach
     void setUp() {
+
     }
+        @Test
+        void whenICallTheCreatePostMethodThenCreateAUserObject() throws Exception{
 
-    @AfterEach
-    void tearDown() {
-    }
+        User user = new User();
+        user.setFirstName("Adewale");
+        user.setLastName("Adekunle");
+        user.setEmail("airtale123@gmail.com");
+        user.setPassword("ringing");
 
-    @Test
-    @DisplayName("Test that when I register user, user is saved in DB")
-    void testRegisterAPI() throws Exception {
-        DtoUserRegistration user =  new DtoUserRegistration();
-        user.setFirstName("Joanna");
-        user.setLastName("Ebreso");
-        user.setEmail("jojo@hotmail.com");
-        user.setPassword("jojo");
-        log.info("User before test -> {}", user);
 
-        User newUser = DtoUserMapper.convertDtoUserRegistrationTouser(user);
-
-        this.mockMvc.perform(post("/user/registerUser")
+        this.mockMvc.perform(post("/user/create")
                 .contentType("application/json")
                 .content(mapper.writeValueAsString(user)))
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andReturn();
 
-        log.info("User after test -> {}", user);
-    }
+        }
+
+
+        @Test
+        void deleteUser() throws Exception{
+            this.mockMvc.perform(delete("/user/deleteUser/30"))
+                    .andDo(print())
+                    .andExpect(status().isOk());
+        }
+
+        @Test
+        void checkUser() throws Exception{
+          this.mockMvc.perform(post("/user/checkUser/30"))
+                  .andDo(print())
+                  .andExpect(status().isFound())
+                  .andReturn();
+        }
 }
