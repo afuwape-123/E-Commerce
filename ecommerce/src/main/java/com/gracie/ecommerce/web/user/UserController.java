@@ -6,17 +6,23 @@ import com.gracie.ecommerce.Exceptions.RegisterException;
 import com.gracie.ecommerce.data.model.User;
 import com.gracie.ecommerce.service.UserService;
 import com.gracie.ecommerce.service.UserServiceImpl;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
+@Service
 @Controller
+@RestController
 @RequestMapping("/user")
-
 public class UserController {
 
     @Autowired
