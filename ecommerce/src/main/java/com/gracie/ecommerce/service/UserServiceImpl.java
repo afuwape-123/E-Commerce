@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
 
 
-    PasswordEncoder passwordEncoder;
+    PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 
 //    @Autowired
@@ -43,6 +43,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User registerUser(DtoUserRegistration dtoUserRegistration) throws RegisterException {
+        User newUser;
         Optional<User> optionalUser = checkIfUserExistsByEmail(dtoUserRegistration.getEmail());
 
 
@@ -52,8 +53,8 @@ public class UserServiceImpl implements UserService {
 
         }
         else{
-           User newUser = DtoUserMapper.convertDtoUserRegistrationTouser(dtoUserRegistration);
-            newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+           newUser = DtoUserMapper.convertDtoUserRegistrationTouser(dtoUserRegistration);
+//            newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
             newUser.setRole(Role.USER);
            return saveUser(newUser);
         }
