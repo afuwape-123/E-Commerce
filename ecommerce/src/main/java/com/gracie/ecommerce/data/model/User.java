@@ -3,6 +3,7 @@ package com.gracie.ecommerce.data.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.List;
 
 @Data
@@ -18,6 +19,7 @@ public class User {
 
     private String lastName;
 
+    @Email(message = "Invalid email")
     private String  email;
 
     private String password;
