@@ -8,6 +8,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
+
 import static org.mockito.Mockito.*;
 
 
@@ -41,10 +43,10 @@ class UserServiceImplTest {
 
     @Test
     void mockDeleteUserTest(){
-        doNothing().when(userRepository).delete(user);
+        doNothing().when(userRepository).deleteById(user.getId());
 
-        userService.deleteUser(user);
+        userService.deleteUser(user.getId());
 
-        verify(userRepository, times(1)).delete(user);
+        verify(userRepository, times(1)).deleteById(user.getId());
     }
 }

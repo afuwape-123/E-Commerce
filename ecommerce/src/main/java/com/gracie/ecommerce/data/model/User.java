@@ -24,7 +24,7 @@ public class User {
 
     private Role role;
 
-    @OneToMany
+    @OneToMany (cascade = CascadeType.PERSIST)
     private List<Address> address;
 
     @OneToOne

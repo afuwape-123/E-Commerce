@@ -37,17 +37,17 @@ public class UserController {
         return ResponseEntity.ok().body(dtoUserRegistration);
     }
 
-    @DeleteMapping("/deleteUser")
-    public ResponseEntity<String> deleteUser(User user){
+    @DeleteMapping("/deleteUser/{id}")
+    public ResponseEntity<String> deleteUser( @PathVariable Integer id){
         try{
-            userService.deleteUser(user);
+            userService.deleteUser(id);
         }
 
         catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
 
-        return new ResponseEntity<>(HttpStatus.IM_USED);
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 
@@ -64,8 +64,8 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PostMapping("/checkUser/{1d}")
-    public ResponseEntity<?> checkIfUserExistsByEmail(@PathVariable("id")  String email)throws Exception{
+    @PostMapping("/checkUser/{email}")
+    public ResponseEntity<?> checkIfUserExistsByEmail(@PathVariable("email")  String email)throws Exception{
         try{
             userService.checkIfUserExistsByEmail(email);
         }
