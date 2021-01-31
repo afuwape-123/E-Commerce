@@ -5,13 +5,15 @@ import com.gracie.ecommerce.data.model.Cart;
 import com.gracie.ecommerce.data.model.Product;
 import com.gracie.ecommerce.data.repositories.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class CartServiceImpl implements CartService {
 
     @Autowired
     CartRepository cartRepository;
+
 
     @Override
     public Cart saveCart(Cart cart) {
@@ -26,18 +28,26 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public Cart findCartById(Integer id) {
+
+        return cartRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public Cart addProductToCart(Product product, Integer cartId) throws Exception {
-        if(!cartRepository.existsById(cartId)){
-            throw new CartException("Cart does not exist");
-        }
-        else{
-            Cart cart = cartRepository.findById(cartId).orElse(null);
-                    assert cart != null;
-                    cart.getProducts().add(product);
+//        if (!cartRepository.existsById(cartId)) {
+//            throw new CartException("Cart does not exist");
+//        }
+//        else {
+            Cart cart = findCartById(cartId);
+            assert cart != null;
+            cart.getProducts().add(product);
+           return saveCart(cart);
 
-                    return cart;
 
-        }
+//        }
+//      return cartRepositoryaddProductToCart(product,cartId);
+
     }
 
     @Override
