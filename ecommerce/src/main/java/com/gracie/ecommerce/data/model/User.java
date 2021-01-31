@@ -19,6 +19,7 @@ public class User {
 
     private String lastName;
 
+
     @Email(message = "Invalid email")
     private String  email;
 
