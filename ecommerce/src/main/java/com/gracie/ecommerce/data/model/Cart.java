@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -18,5 +19,5 @@ public class Cart {
     private User cartOwner;
 
     @OneToMany
-    private List<Product>  products;
+    private List<Product>  products = new ArrayList<>();
 }
