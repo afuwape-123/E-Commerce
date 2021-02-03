@@ -67,9 +67,6 @@ class CartServiceImplTest {
         Cart newCart = new Cart();
         newCart.setProducts(products);
         newCart.setId(1);
-//        Cart savedCart = cartService.saveCart(cart);
-
-//        when(cartRepository.existsById(1)).thenReturn(false);
 
         when(cartRepository.findById(1)).thenReturn(Optional.of(cart));
         when(cartRepository.save(cart)).thenReturn(cart);

@@ -35,19 +35,17 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Cart addProductToCart(Product product, Integer cartId) throws Exception {
-//        if (!cartRepository.existsById(cartId)) {
-//            throw new CartException("Cart does not exist");
-//        }
-//        else {
-            Cart cart = findCartById(cartId);
+        Cart cart = findCartById(cartId);
             assert cart != null;
             cart.getProducts().add(product);
            return saveCart(cart);
 
+    }
 
-//        }
-//      return cartRepositoryaddProductToCart(product,cartId);
-
+   private void doesCartExist(Integer cartId) throws CartException {
+        if (!cartRepository.existsById(cartId)) {
+            throw new CartException("Cart does not exist");
+        }
     }
 
     @Override
