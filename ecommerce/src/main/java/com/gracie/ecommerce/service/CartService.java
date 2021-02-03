@@ -11,6 +11,9 @@ public interface CartService {
 
     void deleteCart(Cart cart);
 
+    Cart findCartById(Integer id);
+
     Cart addProductToCart(Product product, Integer cartId) throws Exception;
+
     List<Cart> findAllProductInCart();
 }
