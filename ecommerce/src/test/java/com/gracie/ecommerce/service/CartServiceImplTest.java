@@ -67,17 +67,25 @@ class CartServiceImplTest {
         Cart newCart = new Cart();
         newCart.setProducts(products);
         newCart.setId(1);
-        Cart savedCart = cartService.saveCart(cart);
+//        Cart savedCart = cartService.saveCart(cart);
 
 //        when(cartRepository.existsById(1)).thenReturn(false);
 
-        when(cartRepository.findById(1)).thenReturn(Optional.ofNullable(savedCart));
+        when(cartRepository.findById(1)).thenReturn(Optional.of(cart));
         when(cartRepository.save(cart)).thenReturn(cart);
 
         cartService.addProductToCart(product, 1);
 
-        verify(cartRepository, times(1)).existsById(1);
+        verify(cartRepository, times(1)).findById(1);
         verify(cartRepository, times(1)).save(cart);
 
     }
+
+//    @Test
+//    void testAddProductToCart(){
+//        Integer productId = product.getId();
+//        Cart cart = cartRepository.findById(cartId);
+//        cart.getProducts().add(productId);
+//
+//    }
 }
