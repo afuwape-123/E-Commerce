@@ -2,6 +2,7 @@ package com.gracie.ecommerce.service;
 
 import com.gracie.ecommerce.Dto.InitializeTransactionResponseDto;
 import com.gracie.ecommerce.Dto.InitializeTransactionRequestDTO;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -14,11 +15,14 @@ import org.springframework.web.client.RestTemplate;
 public class  InitializeTransactionServiceImpl implements InitializeTransactionService{
    RestTemplate restTemplate = new RestTemplate();
 
+   @Value("${paystackApiKey}")
+   private String paystackApiKey;
+
     @Override
     public InitializeTransactionResponseDto initializeTransaction(InitializeTransactionRequestDTO initializeTransactionRequestDTO) {
         String url = "https: //api.paystack.co/transaction/initialize";
         HttpHeaders headers = new HttpHeaders();
-        String key = "sk_test_7d3a04e5f7114ebccfaca580089476413278f1d8";
+        String key = paystackApiKey;
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("Authorization", "Bearer" + key);
         HttpEntity<InitializeTransactionRequestDTO> entity
