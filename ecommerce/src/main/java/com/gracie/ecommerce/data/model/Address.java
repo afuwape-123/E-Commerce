@@ -16,6 +16,7 @@ public class Address {
 
     private Integer house_no;
     private String streetName;
+
     private String city;
     private String state;
     private String postal_code;

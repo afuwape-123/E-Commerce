@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class DtoUserMapper {
     public static User convertDtoUserRegistrationTouser(DtoUserRegistration dtoUserRegistration){
-      User user = new User();
-      user.setEmail(dtoUserRegistration.getEmail());
+     User user = new User();
+     user.setEmail(dtoUserRegistration.getEmail());
       user.setFirstName(dtoUserRegistration.getFirstName());
       user.setLastName(dtoUserRegistration.getLastName());
       user.setPassword(dtoUserRegistration.getPassword());

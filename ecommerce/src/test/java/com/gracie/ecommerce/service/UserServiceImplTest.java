@@ -26,6 +26,7 @@ class UserServiceImplTest {
     UserServiceImpl userService;
 
     User user;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
