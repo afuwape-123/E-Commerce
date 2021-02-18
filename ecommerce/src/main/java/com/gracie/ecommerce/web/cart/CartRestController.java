@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CartRestController {
 
     @Autowired
-    CartServiceImpl cartServiceImpl;
+    CartService cartServiceImpl;
 
     @PostMapping("/save")
     public ResponseEntity<?> saveCart(Cart cart)throws Exception{
@@ -34,17 +34,15 @@ public class CartRestController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/deleteCart/{cartId}")
-    public ResponseEntity<String> deleteCart (@PathVariable Integer cartId){
+    @DeleteMapping("/deleteCart/{id}")
+    public void deleteCart (@PathVariable("id") Integer id){
         try{
-            cartServiceImpl.deleteCart(cartId);
+            cartServiceImpl.deleteCart(id);
         }
 
         catch (Exception e) {
 
-            return ResponseEntity.badRequest().body(e.getMessage());
+            ResponseEntity.badRequest().body(e.getMessage());
         }
-
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
