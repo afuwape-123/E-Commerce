@@ -44,9 +44,9 @@ class CartServiceImplTest {
 
     @Test
     void mockTestDeleteCart(){
-        doNothing().when(cartRepository).delete(cart);
+        doNothing().when(cartRepository).deleteById(cart.getId());
 
-        cartService.deleteCart(cart);
+        cartService.deleteCart(cart.getId());
 
         verify(cartRepository, times(1)).delete(cart);
     }
@@ -66,23 +66,35 @@ class CartServiceImplTest {
 
         Cart newCart = new Cart();
         newCart.setProducts(products);
+        newCart.getProducts().add(product);
         newCart.setId(1);
 
-        when(cartRepository.findById(1)).thenReturn(Optional.of(cart));
-        when(cartRepository.save(cart)).thenReturn(cart);
+//        when(cartRepository.existsById(1)).thenReturn(false);
+
+        when(cartRepository.findById(1)).thenReturn(Optional.of(newCart));
+        when(cartRepository.save(newCart)).thenReturn(newCart);
 
         cartService.addProductToCart(product, 1);
 
         verify(cartRepository, times(1)).findById(1);
-        verify(cartRepository, times(1)).save(cart);
+        verify(cartRepository, times(1)).save(newCart);
 
     }
 
-//    @Test
-//    void testAddProductToCart(){
-//        Integer productId = product.getId();
-//        Cart cart = cartRepository.findById(cartId);
-//        cart.getProducts().add(productId);
-//
-//    }
+    @Test
+    void testThatProductsAreAddedToCart(){
+        List<Product> products = new ArrayList<>();
+        Cart cart = new Cart();
+        cart.setProducts(products);
+        cart.getProducts().add(product);
+        cart.setId(3);
+
+        when(cartRepository.findById(3)).thenReturn(Optional.of(cart));
+        when(cartRepository.save(cart)).thenReturn(cart);
+
+        cartService.addProductToCart(product, 3);
+
+        verify(cartRepository, times(1)).findById(3);
+        verify(cartRepository, times(1)).save(cart);
+    }
 }

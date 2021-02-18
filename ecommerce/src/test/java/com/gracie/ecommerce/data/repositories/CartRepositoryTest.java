@@ -17,13 +17,14 @@ class CartRepositoryTest {
     CartRepository cartRepository;
 
     @Autowired
-            UserRepository userRepository;
+    UserRepository userRepository;
 
     Cart cart;
 
     @BeforeEach
     void setUp() {
         cart = new Cart();
+
     }
 
     @Test
