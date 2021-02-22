@@ -5,5 +5,5 @@ import com.gracie.ecommerce.Dto.InitializeTransactionResponseDto;
 
 public interface InitializeTransactionService {
     InitializeTransactionResponseDto initializeTransaction(
-            InitializeTransactionRequestDTO initializeTransactionResponseDto);
+            InitializeTransactionRequestDTO initializeTransactionRequestDto);
 }
