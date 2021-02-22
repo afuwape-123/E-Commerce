@@ -6,7 +6,13 @@ import com.gracie.ecommerce.Exceptions.RegisterException;
 import com.gracie.ecommerce.data.model.Role;
 import com.gracie.ecommerce.data.model.User;
 import com.gracie.ecommerce.data.repositories.UserRepository;
+import com.gracie.ecommerce.security.dtos.UserLoginRequestDTO;
+import com.gracie.ecommerce.security.exception.AuthenticationException;
+import com.gracie.ecommerce.security.exception.AuthorizationException;
+import com.gracie.ecommerce.security.security.JWTToken;
+import com.gracie.ecommerce.security.security.UserPrincipalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,6 +25,9 @@ import java.util.Optional;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
+
+    @Autowired
+    UserPrincipalService userPrincipalService;
 
     @Autowired
     UserRepository userRepository;
@@ -67,6 +76,14 @@ public class UserServiceImpl implements UserService {
 
         return userRepository.findByEmail(email);
     }
+
+    @Override
+    public JWTToken loginUser(UserLoginRequestDTO userLoginRequestDTO) throws AuthenticationException, AuthorizationException {
+
+        return userPrincipalService.loginUser(userLoginRequestDTO);
+    }
+
+
 
 
 }

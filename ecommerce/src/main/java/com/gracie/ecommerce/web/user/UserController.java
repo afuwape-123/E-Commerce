@@ -4,8 +4,10 @@ package com.gracie.ecommerce.web.user;
 import com.gracie.ecommerce.Dto.DtoUserRegistration;
 import com.gracie.ecommerce.Exceptions.RegisterException;
 import com.gracie.ecommerce.data.model.User;
+import com.gracie.ecommerce.security.dtos.UserLoginRequestDTO;
 import com.gracie.ecommerce.service.UserService;
 import com.gracie.ecommerce.service.UserServiceImpl;
+import com.gracie.ecommerce.web.dtos.ApiResponse;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Slf4j
 @Service
@@ -76,4 +80,19 @@ public class UserController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PostMapping("login")
+    public ResponseEntity<?> login(@Valid @RequestBody UserLoginRequestDTO userLoginRequestDTO){
+        //@RequestBody annotation maps the HttpRequest body to a transfer or domain object, enabling automatic deserialization of the inbound HttpRequest body onto a Java object.
+        try
+        {
+            return new ResponseEntity<>(userService.loginUser(userLoginRequestDTO), HttpStatus.OK);
+        }
+        catch (Exception exception){
+            return new ResponseEntity<>(new ApiResponse(false, exception.getMessage()), HttpStatus.UNAUTHORIZED);
+        }
+
+
+    }
+
 }

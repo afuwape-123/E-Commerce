@@ -16,7 +16,7 @@ public class  InitializeTransactionServiceImpl implements InitializeTransactionS
 
     @Override
     public InitializeTransactionResponseDto initializeTransaction(InitializeTransactionRequestDTO initializeTransactionRequestDTO) {
-        String url = "https: //api.paystack.co/transaction/initialize";
+        String url = "https://api.paystack.co/transaction/initialize";
         HttpHeaders headers = new HttpHeaders();
         String key = "sk_test_7d3a04e5f7114ebccfaca580089476413278f1d8";
         headers.setContentType(MediaType.APPLICATION_JSON);
